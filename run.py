@@ -7,9 +7,14 @@ def show_menu():
     menu_items = ['1. View task planner', '2. Add task to planner', '3. Mark task as complete', '4. Remove task', '5. Exit task planner']
     for item in menu_items:
         print(item)
-    print('\nPlease enter a number between 1-5, corresponding to your choice.')
 
-
+def menu_choice():
+    choice = input('Please enter a number between 1-5, corresponding to your choice. ')
+    if choice == "1":
+            view_tasks()
+    else:
+        leave_planner()
+    
 def view_tasks():
     print('You have not yet added any tasks')
 
@@ -26,11 +31,12 @@ def remove_task():
 
 def leave_planner():
     print('Would you like to exit the planner?')
-    input('Please enter y (for yes) or n (for no) ')
+    input('Please enter "yes" or "no" ')
 
 def main():
     show_menu()
-    # view_tasks()
+    menu_choice()
+    view_tasks()
     # add_task()
     # complete_task()
     # remove_task()
