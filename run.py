@@ -12,8 +12,16 @@ def menu_choice():
     choice = input('Please enter a number between 1-5, corresponding to your choice. ')
     if choice == "1":
             view_tasks()
-    else:
+    elif choice == "2":
+            add_task()
+    elif choice == "3":
+            complete_task()
+    elif choice == "4":
+            remove_task()
+    elif choice == "5":
         leave_planner()
+    else:
+        print('You have not entered a valid choice. Please enter a number between 1-5.')
     
 def view_tasks():
     print('You have not yet added any tasks')
