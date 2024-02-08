@@ -1,9 +1,10 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
+print('Welcome to your daily task planner!')
+name = input('What is your name? ')
+print('\nHello, {}, what would you like to do today?\n'.format(name))
+
 def show_menu():
-    print('Welcome to your daily task planner!')
-    name = input('What is your name? ')
-    print('\nHello, {}, what would you like to do today?\n'.format(name))
     menu_items = ['1. View task planner', '2. Add task to planner', '3. Mark task as complete', '4. Remove task', '5. Exit task planner']
     for item in menu_items:
         print(item)
@@ -24,8 +25,19 @@ def menu_choice():
         print('You have not entered a valid choice. Please enter a number between 1-5.')
     
 def view_tasks(tasks):
-    print(f"{tasks}")
-    print('You have not yet added any tasks')
+    if tasks:
+        print(f"Your tasks: {tasks}")
+    else:
+        print('You have not yet added any tasks.\n')
+        print('Would you like to add a task?\n')
+        response = input('Please enter "yes" or "no"  ')
+        if response == "yes":
+            add_task(tasks)
+        elif response == "no":
+            print('What would you like to do now?')
+            show_menu()
+        else:
+            print('You have not entered a valid answer. Please enter "yes" or "no".')
 
 def add_task(tasks):
     new_task = input('Please enter a task: ')
