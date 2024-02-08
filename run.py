@@ -38,9 +38,17 @@ def menu_choice():
     
 def view_tasks(tasks):
     if tasks:
-        # iterating through list of tasks and printing one by one
-        for task in tasks:
-            print(task.capitalize())
+        print('\nYour tasks:')
+        """
+        Iterating through list of tasks and printing one by one.
+        Enumerate method used to count tasks in list, starting from 1
+        for better user comprehension in later function.
+        Method suggested here: 
+        https://stackoverflow.com/questions/73923829/how-to-accept-input-from-an-enumerated-list-in-python
+        and learned here: https://realpython.com/python-enumerate/
+        """
+        for count, task in enumerate(tasks, start=1):
+            print(count, task.capitalize())
     else:
         print('You have not yet added any tasks.\n')
         print('Would you like to add a task?\n')
