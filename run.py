@@ -5,11 +5,20 @@ name = input('What is your name? ')
 print('\nHello, {}, what would you like to do today?\n'.format(name))
 
 def show_menu():
+    """
+    Display menu items and iterate through them to print each on
+    new line"
+    """
     menu_items = ['1. View task planner', '2. Add task to planner', '3. Mark task as complete', '4. Remove task', '5. Exit task planner']
     for item in menu_items:
         print(item)
 
 def menu_choice():
+    """
+    Connecting choice made by user with corresponding function
+    While loop iterates through choices indefinitely until user 
+    selects to leave the planner
+    """
     while True:
         choice = input('Please enter a number between 1-5, corresponding to your choice. ')
         if choice == "1":
@@ -27,12 +36,13 @@ def menu_choice():
     
 def view_tasks(tasks):
     if tasks:
+        # iterating through list of tasks and printing one by one
         for task in tasks:
             print(task)
     else:
         print('You have not yet added any tasks.\n')
         print('Would you like to add a task?\n')
-        response = input('Please enter "yes" or "no"  ')
+        response = input('Please enter "yes" or "no".  ')
         if response == "yes":
             add_task(tasks)
         elif response == "no":
