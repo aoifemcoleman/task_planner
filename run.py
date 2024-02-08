@@ -10,7 +10,6 @@ def main():
     show_menu()
 
 print('Welcome to your daily task planner!')
-print('What is your name?')
-name = input()
-print('Hello,',name, ', what would you like to do today?')
+name = input('What is your name? ')
+print('Hello, {}, what would you like to do today?'.format(name))
 main()
