@@ -2,7 +2,9 @@
 
 print('Welcome to your daily task planner!')
 name = input('What is your name? ')
-print('\nHello, {}, what would you like to do today?\n'.format(name))
+# https://flexiple.com/python/python-capitalize-first-letter
+# https://www.w3schools.com/python/ref_string_format.asp
+print('\nHello, {}, what would you like to do today?\n'.format(name.capitalize()))
 
 def show_menu():
     """
@@ -38,14 +40,14 @@ def view_tasks(tasks):
     if tasks:
         # iterating through list of tasks and printing one by one
         for task in tasks:
-            print(task)
+            print(task.capitalize())
     else:
         print('You have not yet added any tasks.\n')
         print('Would you like to add a task?\n')
         response = input('Please enter "yes" or "no".  ')
-        if response == "yes":
+        if response.lower() == "yes":
             add_task(tasks)
-        elif response == "no":
+        elif response.lower() == "no":
             print('\nWhat would you like to do now?')
             # show_menu()
             # menu_choice()
