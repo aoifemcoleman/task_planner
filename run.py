@@ -77,9 +77,35 @@ def add_task(tasks):
     # print('\nWhat would you like to do now?')
     show_menu()
 
-def complete_task():
-    print('Select task to list as complete')
-    print('Please enter number corresponding to task number')
+def complete_task(tasks):
+    print('\nYour tasks:')
+    """
+    Iterating through tasks to print with corresponding numbers for user
+    to make numeric choice from
+    """
+    # possible separate function can be made for below step, as is repeated
+    for count, task in enumerate(tasks, start=1):
+            print(count, task.capitalize())
+    if tasks:
+        completed_task_number = input('Please enter the number corresponding to the task you wish to mark as complete: ')
+        if completed_task_number.isnumeric():
+            completed_task_number = int(completed_task_number)
+            if completed_task_number <= len(tasks):
+                completed_task = tasks[completed_task_number]
+                tasks[completed_task_number] = f'{completed_task} (Completed)'
+                print(f'"{completed_task}" has been marked as complete.')
+                updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
+                for count, task in updated_tasks:
+                    print(count, task)
+            else:
+                print('Invalid task number. Please enter a valid number.')
+        else:
+            print('You have not entered a valid answer. Please enter a numeric value.')
+    else: 
+        print('No tasks to mark as complete')
+        # Logic to go back to main menu or leave planner to go here
+
+    
 
 def remove_task():
     print('Select task to remove')
