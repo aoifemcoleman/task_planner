@@ -11,17 +11,18 @@ def show_menu():
     Display menu items and iterate through them to print each on
     new line"
     """
-    menu_items = ['1. View task planner', '2. Add task to planner', '3. Mark task as complete', '4. Remove task', '5. Exit task planner']
-    for item in menu_items:
-        print(item)
-
-def menu_choice():
-    """
-    Connecting choice made by user with corresponding function
-    While loop iterates through choices indefinitely until user 
-    selects to leave the planner
-    """
     while True:
+        print('\nMain Menu:\n')
+        menu_items = ['1. View task planner', '2. Add task to planner', '3. Mark task as complete', '4. Remove task', '5. Exit task planner']
+        for item in menu_items:
+            print(item)
+
+# def menu_choice():
+        """
+        Connecting choice made by user with corresponding function
+        While loop iterates through choices indefinitely until user 
+        selects to leave the planner
+        """
         choice = input('Please enter a number between 1-5, corresponding to your choice. ')
         if choice == "1":
             view_tasks(tasks)
@@ -57,7 +58,7 @@ def view_tasks(tasks):
             add_task(tasks)
         elif response.lower() == "no":
             print('\nWhat would you like to do now?')
-            # show_menu()
+            show_menu()
             # menu_choice()
         else:
             print('You have not entered a valid answer. Please enter "yes" or "no".')
@@ -67,7 +68,7 @@ def add_task(tasks):
     tasks.append(new_task)
     print('\nYour task has been added')
     print('Would you like to add another task?')
-    response = input('Please enter "yes" or "no".  ')
+    response = input('Please enter "yes" to continue or "no", to go back to main menu.  ')
     if response.lower() == "yes":
         add_task(tasks)
     elif response.lower() == "no":
@@ -91,10 +92,10 @@ def complete_task(tasks):
         if completed_task_number.isnumeric():
             completed_task_number = int(completed_task_number)
             if completed_task_number <= len(tasks):
-            """
-            Deducting 1 from completed_task_number as list is displayed to
-            user starting from 1 rather than 0 as per list ordering
-            """
+                """
+                Deducting 1 from completed_task_number as list is displayed to
+                user starting from 1 rather than 0 as per list ordering
+                """
                 completed_task = tasks[completed_task_number - 1]
                 tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
                 print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
@@ -130,7 +131,7 @@ tasks = []
 
 def main():
     show_menu()
-    menu_choice()
+    # menu_choice()
     view_tasks(tasks)
     add_task(tasks)
     # complete_task()
