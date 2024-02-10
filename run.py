@@ -7,7 +7,7 @@ print('Welcome to your daily task planner!')
 name = input('\nWhat is your name?\n')
 # https://flexiple.com/python/python-capitalize-first-letter
 # https://www.w3schools.com/python/ref_string_format.asp
-print('\nHello, {}, what would you like to do today?\n'.format(name.capitalize()))
+print('\nHello, {}, what would you like to do today?'.format(name.capitalize()))
 
 def show_menu():
     """
@@ -15,10 +15,11 @@ def show_menu():
     new line"
     """
     while True:
-        print('\nMain Menu:\n')
+        console = Console()
+        console.print('\nMain Menu:\n', style="bold cyan")
         menu_items = ['1. View task planner', '2. Add task to planner', '3. Mark task as complete', '4. Remove task', '5. Exit task planner']
         for item in menu_items:
-            print(item)
+            console.print(item, style="magenta")
 
 # def menu_choice():
         """
@@ -43,9 +44,8 @@ def show_menu():
 def view_tasks(tasks):
     if tasks:
         table = Table(title="Your tasks")
-        table.add_column("Task Number", justify="right", style="cyan", no_wrap=True)
-        table.add_column("Task Name", style="magenta")
-        # print('\nYour tasks:')
+        table.add_column("Task Number", justify="center", style="cyan")
+        table.add_column("Task Name", justify="center", style="magenta")
         """
         Iterating through list of tasks and printing one by one.
         Enumerate method used to count tasks in list, starting from 1
@@ -59,43 +59,60 @@ def view_tasks(tasks):
         
         console = Console()
         console.print(table)
+        leave_or_stay()
     else:
-        print('\nYou have not yet added any tasks.')
-        print('\nWould you like to add a task?\n')
-        while True:
-            response = input('\nPlease enter "yes" or "no"\n')
-            try:
-                if response.lower() == "yes":
-                    add_task(tasks)
-                elif response.lower() == "no":
-                    leave_or_stay()
-                else:
-                    raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
-            except ValueError as e:
-                print(f"Error: {e}")
-    leave_or_stay()
+        no_tasks()
+        # print('\nYou have not yet added any tasks.')
+        # print('\nWould you like to add a task?\n')
+        # while True:
+        #     response = input('\nPlease enter "yes" or "no"\n')
+        #     try:
+        #         if response.lower() == "yes":
+        #             add_task(tasks)
+        #         elif response.lower() == "no":
+        #             leave_or_stay()
+        #         else:
+        #             raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
+        #     except ValueError as e:
+        #         print(f"Error: {e}")
+        leave_or_stay()
+
+def no_tasks():
+    print('\nYou have not yet added any tasks.')
+    print('\nWould you like to add a task?\n')
+    while True:
+        response = input('\nPlease enter "yes" or "no"\n')
+        try:
+            if response.lower() == "yes":
+                add_task(tasks)
+            elif response.lower() == "no":
+                leave_or_stay()
+            else:
+                raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
+        except ValueError as e:
+            print(f"Error: {e}")
 
 def add_task(tasks):
-        new_task = input('\nPlease enter a task:\n')
-        tasks.append(new_task)
-        print('\nYour task has been added')
-        print('\nWould you like to add another task?')
-        """
-        While loop repeats until user has entered valid response.
-        Exception handling used to raise error if invalid input from
-        user received"
-        """
-        while True:
-            response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
-            try:
-                if response.lower() == "yes":
-                    add_task(tasks)
-                elif response.lower() == "no":
-                    show_menu()
-                else:
-                    raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
-            except ValueError as e:
-                print(f"Error: {e}")
+    new_task = input('\nPlease enter a task:\n')
+    tasks.append(new_task)
+    print('\nYour task has been added')
+    print('\nWould you like to add another task?')
+    """
+    While loop repeats until user has entered valid response.
+    Exception handling used to raise error if invalid input from
+    user received"
+    """
+    while True:
+        response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
+        try:
+            if response.lower() == "yes":
+                add_task(tasks)
+            elif response.lower() == "no":
+                show_menu()
+            else:
+                raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
+        except ValueError as e:
+            print(f"Error: {e}")
 
 def complete_task(tasks):
     if tasks:
