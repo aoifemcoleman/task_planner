@@ -87,16 +87,20 @@ def complete_task(tasks):
     for count, task in enumerate(tasks, start=1):
             print(count, task.capitalize())
     if tasks:
-        completed_task_number = input('Please enter the number corresponding to the task you wish to mark as complete: ')
+        completed_task_number = input('Please enter the number corresponding to the task you wish to mark as complete:\n')
         if completed_task_number.isnumeric():
             completed_task_number = int(completed_task_number)
             if completed_task_number <= len(tasks):
-                completed_task = tasks[completed_task_number]
-                tasks[completed_task_number] = f'{completed_task} (Completed)'
-                print(f'"{completed_task}" has been marked as complete.')
+            """
+            Deducting 1 from completed_task_number as list is displayed to
+            user starting from 1 rather than 0 as per list ordering
+            """
+                completed_task = tasks[completed_task_number - 1]
+                tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
+                print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
                 updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
-                for count, task in updated_tasks:
-                    print(count, task)
+                # for count, task in updated_tasks:
+                #     print(count, task)
             else:
                 print('Invalid task number. Please enter a valid number.')
         else:
