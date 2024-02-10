@@ -1,4 +1,5 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+from rich import print
 
 print('Welcome to your daily task planner!')
 name = input('\nWhat is your name?\n')
