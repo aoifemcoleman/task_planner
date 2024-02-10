@@ -23,7 +23,7 @@ def show_menu():
         While loop iterates through choices indefinitely until user 
         selects to leave the planner
         """
-        choice = input('Please enter a number between 1-5, corresponding to your choice. ')
+        choice = input('Please enter a number between 1-5, corresponding to your choice.\n')
         if choice == "1":
             view_tasks(tasks)
         elif choice == "2":
@@ -53,15 +53,18 @@ def view_tasks(tasks):
     else:
         print('You have not yet added any tasks.\n')
         print('Would you like to add a task?\n')
-        response = input('Please enter "yes" or "no".  ')
-        if response.lower() == "yes":
-            add_task(tasks)
-        elif response.lower() == "no":
-            print('\nWhat would you like to do now?')
-            show_menu()
-            # menu_choice()
-        else:
-            print('You have not entered a valid answer. Please enter "yes" or "no".')
+        while True:
+            response = input('Please enter "yes" or "no"\n')
+            try:
+                if response.lower() == "yes":
+                    add_task(tasks)
+                elif response.lower() == "no":
+                    print('\nWhat would you like to do now?')
+                    show_menu()
+                else:
+                    raise ValueError('You have not entered a valid answer. Please enter "yes" or "no".')
+            except ValueError as e:
+                print(f"Error: {e}")
 
 def add_task(tasks):
         new_task = input('\nPlease enter a task: ')
