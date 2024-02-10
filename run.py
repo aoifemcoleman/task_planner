@@ -1,5 +1,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 from rich import print
+from rich.console import Console
+from rich.table import Table
 
 print('Welcome to your daily task planner!')
 name = input('\nWhat is your name?\n')
@@ -40,7 +42,10 @@ def show_menu():
     
 def view_tasks(tasks):
     if tasks:
-        print('\nYour tasks:')
+        table = Table(title="Your tasks")
+        table.add_column("Task Number", justify="right", style="cyan", no_wrap=True)
+        table.add_column("Task Name", style="magenta")
+        # print('\nYour tasks:')
         """
         Iterating through list of tasks and printing one by one.
         Enumerate method used to count tasks in list, starting from 1
@@ -50,7 +55,10 @@ def view_tasks(tasks):
         and learned here: https://realpython.com/python-enumerate/
         """
         for count, task in enumerate(tasks, start=1):
-            print(count, task.capitalize())
+            table.add_row(str(count), task.capitalize())
+        
+        console = Console()
+        console.print(table)
     else:
         print('\nYou have not yet added any tasks.')
         print('\nWould you like to add a task?\n')
@@ -230,7 +238,7 @@ tasks = []
 def main():
     show_menu()
     # menu_choice()
-    view_tasks(tasks)
+    # view_tasks(tasks)
     add_task(tasks)
     # complete_task()
     # remove_task()
