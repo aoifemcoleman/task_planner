@@ -51,8 +51,8 @@ def view_tasks(tasks):
         for count, task in enumerate(tasks, start=1):
             print(count, task.capitalize())
     else:
-        print('You have not yet added any tasks.\n')
-        print('Would you like to add a task?\n')
+        print('\nYou have not yet added any tasks.')
+        print('\nWould you like to add a task?\n')
         while True:
             response = input('\nPlease enter "yes" or "no"\n')
             try:
@@ -61,7 +61,7 @@ def view_tasks(tasks):
                 elif response.lower() == "no":
                     leave_or_stay()
                 else:
-                    raise ValueError('You have not entered a valid answer. Please enter "yes" or "no".')
+                    raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
             except ValueError as e:
                 print(f"Error: {e}")
     leave_or_stay()
@@ -70,7 +70,7 @@ def add_task(tasks):
         new_task = input('\nPlease enter a task:\n')
         tasks.append(new_task)
         print('\nYour task has been added')
-        print('Would you like to add another task?')
+        print('\nWould you like to add another task?')
         """
         While loop repeats until user has entered valid response.
         Exception handling used to raise error if invalid input from
@@ -84,7 +84,7 @@ def add_task(tasks):
                 elif response.lower() == "no":
                     show_menu()
                 else:
-                    raise ValueError('You have not entered a valid answer. Please enter "yes" or "no".')
+                    raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
             except ValueError as e:
                 print(f"Error: {e}")
 
@@ -153,7 +153,7 @@ def add_another_task():
     
 
 def remove_task(tasks):
-    print('You have selected to remove a task from your list')
+    print('\nYou have selected to remove a task from your list')
     print('\nYour tasks:')
     """
     Iterating through tasks to print with corresponding numbers for user
@@ -172,22 +172,39 @@ def remove_task(tasks):
                 removed_task = tasks.pop(remove_task_number - 1)
                 print(f'\n"{removed_task.capitalize()}" has been removed.')
                 updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
+                remove_another_task()
             else:
-                print('Invalid task number. Please enter a valid number.')
+                print('\nInvalid task number. Please enter a valid number.')
         else:
-            print('You have not entered a valid answer. Please enter a numeric value.')
+            print('\nYou have not entered a valid answer. Please enter a numeric value.')
     else: 
-        print('No tasks have been added')
+        print('\nNo tasks have been added')
         leave_or_stay()
+    
+
+def remove_another_task():
+    print('\nWould you like to remove another task?')
+    while True:
+        response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
+        try:
+            if response.lower() == "yes":
+                remove_task(tasks)
+                break
+            elif response.lower() == "no":
+                show_menu()
+            else:
+                raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
+        except ValueError as e:
+            print(f"Error: {e}")
 
 def leave_planner():
-    print('Would you like to exit the planner?')
+    print('\nWould you like to exit the planner?')
     response = input('\nPlease enter "yes" or "no":\n')
     if response.lower() == "yes":
-        print('Goodbye, best of luck completing your tasks!')
+        print('\nGoodbye, best of luck completing your tasks!')
         exit()
     else:
-        print('What would you like to do?')
+        print('\nWhat would you like to do?')
         show_menu()
 
 def leave_or_stay():
