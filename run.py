@@ -64,19 +64,27 @@ def view_tasks(tasks):
             print('You have not entered a valid answer. Please enter "yes" or "no".')
 
 def add_task(tasks):
-    new_task = input('\nPlease enter a task: ')
-    tasks.append(new_task)
-    print('\nYour task has been added')
-    print('Would you like to add another task?')
-    response = input('Please enter "yes" to continue or "no", to go back to main menu.  ')
-    if response.lower() == "yes":
-        add_task(tasks)
-    elif response.lower() == "no":
-        print('\nWhat would you like to do now?')
-    else:
-        print('You have not entered a valid answer. Please enter "yes" or "no".')
-    # print('\nWhat would you like to do now?')
-    show_menu()
+        new_task = input('\nPlease enter a task: ')
+        tasks.append(new_task)
+        print('\nYour task has been added')
+        print('Would you like to add another task?')
+        """
+        While loop repeats until user has entered valid response.
+        Exception handling used to raise error if invalid input from
+        user received"
+        """
+        while True:
+            response = input('Please enter "yes" to continue or "no", to return to main menu.  ')
+            try:
+                if response.lower() == "yes":
+                    add_task(tasks)
+                elif response.lower() == "no":
+                    print('Going back to main menu...')
+                    show_menu()
+                else:
+                    raise ValueError('You have not entered a valid answer. Please enter "yes" or "no".')
+            except ValueError as e:
+                print(f"Error: {e}")
 
 def complete_task(tasks):
     print('\nYour tasks:')
