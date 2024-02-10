@@ -59,12 +59,12 @@ def view_tasks(tasks):
                 if response.lower() == "yes":
                     add_task(tasks)
                 elif response.lower() == "no":
-                    print('\nWhat would you like to do now?')
-                    show_menu()
+                    leave_or_stay()
                 else:
                     raise ValueError('You have not entered a valid answer. Please enter "yes" or "no".')
             except ValueError as e:
                 print(f"Error: {e}")
+    leave_or_stay()
 
 def add_task(tasks):
         new_task = input('\nPlease enter a task: ')
@@ -82,8 +82,7 @@ def add_task(tasks):
                 if response.lower() == "yes":
                     add_task(tasks)
                 elif response.lower() == "no":
-                    print('Going back to main menu...')
-                    show_menu()
+                    leave_or_stay()
                 else:
                     raise ValueError('You have not entered a valid answer. Please enter "yes" or "no".')
             except ValueError as e:
@@ -122,6 +121,7 @@ def complete_task(tasks):
                 print(f"Error: {e}")
     else: 
         print('No tasks to mark as complete')
+        leave_or_stay()
         # Logic to go back to main menu or leave planner to go here
 
     
@@ -152,6 +152,7 @@ def remove_task(tasks):
             print('You have not entered a valid answer. Please enter a numeric value.')
     else: 
         print('No tasks have been added')
+        leave_or_stay()
 
 def leave_planner():
     print('Would you like to exit the planner?')
@@ -162,6 +163,22 @@ def leave_planner():
     else:
         print('What would you like to do?')
         show_menu()
+
+def leave_or_stay():
+    print('\nWould you like to return to the main menu or leave the planner?')
+    while True:
+        answer = input('\nPlease enter "return" for the main menu, or "leave" to exit.\n')
+        try:
+            if answer.lower() == "return":
+                print('\nReturning to main menu...')
+                show_menu()
+            elif answer.lower() == "leave":
+                print('\nGoodbye, best of luck completing your tasks!')
+                exit()
+            else:
+                raise ValueError('Invalid input. Please enter "return" for the main menu, or "leave" to exit planner.')
+        except ValueError as e:
+            print(f"Error: {e}")
 
 
 tasks = []
