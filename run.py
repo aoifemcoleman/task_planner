@@ -66,7 +66,15 @@ def add_task(tasks):
     new_task = input('\nPlease enter a task: ')
     tasks.append(new_task)
     print('\nYour task has been added')
-    print('\nWhat would you like to do now?')
+    print('Would you like to add another task?')
+    response = input('Please enter "yes" or "no".  ')
+    if response.lower() == "yes":
+        add_task(tasks)
+    elif response.lower() == "no":
+        print('\nWhat would you like to do now?')
+    else:
+        print('You have not entered a valid answer. Please enter "yes" or "no".')
+    # print('\nWhat would you like to do now?')
     show_menu()
 
 def complete_task():
