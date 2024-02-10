@@ -89,37 +89,51 @@ def add_task(tasks):
                 print(f"Error: {e}")
 
 def complete_task(tasks):
-    print('\nYour tasks:')
-    """
-    Iterating through tasks to print with corresponding numbers for user
-    to make numeric choice from
-    """
-    # possible separate function can be made for below step, as is repeated
-    for count, task in enumerate(tasks, start=1):
-            print(count, task.capitalize())
     if tasks:
-        while True:
-            completed_task_number = input('\nPlease enter the number corresponding to the task you wish to mark as complete:\n')
-            try:
-                if completed_task_number.isnumeric():
-                    completed_task_number = int(completed_task_number)
-                    if completed_task_number <= len(tasks):
-                        """
-                        Deducting 1 from completed_task_number as list is displayed to
-                        user starting from 1 rather than 0 as per list ordering
-                        """
-                        completed_task = tasks[completed_task_number - 1]
-                        tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
-                        print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
-                        updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
-                        break
+        print('\nYour tasks:')
+        """
+        Iterating through tasks to print with corresponding numbers for user
+        to make numeric choice from
+        """
+        # possible separate function can be made for below step, as is repeated
+        for count, task in enumerate(tasks, start=1):
+            print(count, task.capitalize())
+        if tasks:
+            while True:
+                completed_task_number = input('\nPlease enter the number corresponding to the task you wish to mark as complete:\n')
+                try:
+                    if completed_task_number.isnumeric():
+                        completed_task_number = int(completed_task_number)
+                        if completed_task_number <= len(tasks):
+                            """
+                            Deducting 1 from completed_task_number as list is displayed to
+                            user starting from 1 rather than 0 as per list ordering
+                            """
+                            completed_task = tasks[completed_task_number - 1]
+                            """
+                            Check to prevent user marking task as complete multiple times
+                            """
+                            if "(Completed)" not in completed_task:    
+                                tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
+                                print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
+                                updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
+                                break
+                            else:
+                                print(f'"{completed_task.capitalize()}" has already been marked as complete.')
+                                add_another_task()
+                        else:
+                            raise ValueError('Invalid task number. Please enter a valid number.')
                     else:
-                        raise ValueError('Invalid task number. Please enter a valid number.')
-                else:
-                    raise ValueError('You have not entered a valid answer. Please enter a numeric value.')
-            except ValueError as e:
-                print(f"Error: {e}")
-    print('\nWould you like to mark another task as completed?')
+                        raise ValueError('You have not entered a valid answer. Please enter a numeric value.')
+                except ValueError as e:
+                    print(f"Error: {e}")
+    else:
+        print('\nYou have not added any tasks to mark as complete')
+        show_menu()
+    add_another_task() 
+
+def add_another_task():
+    print('\nWould you like to mark another task as complete?')
     while True:
         response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n  ')
         try:
