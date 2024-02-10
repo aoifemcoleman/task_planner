@@ -1,7 +1,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 print('Welcome to your daily task planner!')
-name = input('What is your name? ')
+name = input('\nWhat is your name?\n')
 # https://flexiple.com/python/python-capitalize-first-letter
 # https://www.w3schools.com/python/ref_string_format.asp
 print('\nHello, {}, what would you like to do today?\n'.format(name.capitalize()))
@@ -23,7 +23,7 @@ def show_menu():
         While loop iterates through choices indefinitely until user 
         selects to leave the planner
         """
-        choice = input('Please enter a number between 1-5, corresponding to your choice.\n')
+        choice = input('\nPlease enter a number between 1-5, corresponding to your choice.\n')
         if choice == "1":
             view_tasks(tasks)
         elif choice == "2":
@@ -54,7 +54,7 @@ def view_tasks(tasks):
         print('You have not yet added any tasks.\n')
         print('Would you like to add a task?\n')
         while True:
-            response = input('Please enter "yes" or "no"\n')
+            response = input('\nPlease enter "yes" or "no"\n')
             try:
                 if response.lower() == "yes":
                     add_task(tasks)
@@ -67,7 +67,7 @@ def view_tasks(tasks):
     leave_or_stay()
 
 def add_task(tasks):
-        new_task = input('\nPlease enter a task: ')
+        new_task = input('\nPlease enter a task:\n')
         tasks.append(new_task)
         print('\nYour task has been added')
         print('Would you like to add another task?')
@@ -77,7 +77,7 @@ def add_task(tasks):
         user received"
         """
         while True:
-            response = input('Please enter "yes" to continue or "no", to return to main menu.  ')
+            response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
             try:
                 if response.lower() == "yes":
                     add_task(tasks)
@@ -135,7 +135,7 @@ def complete_task(tasks):
 def add_another_task():
     print('\nWould you like to mark another task as complete?')
     while True:
-        response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n  ')
+        response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
         try:
             if response.lower() == "yes":
                 complete_task(tasks)
@@ -162,7 +162,7 @@ def remove_task(tasks):
     for count, task in enumerate(tasks, start=1):
             print(count, task.capitalize())
     if tasks:
-        remove_task_number = input('Please enter the number corresponding to the task you wish to remove:\n')
+        remove_task_number = input('\nPlease enter the number corresponding to the task you wish to remove:\n')
         if remove_task_number.isnumeric():
             remove_task_number = int(remove_task_number)
             if remove_task_number <= len(tasks):
@@ -182,7 +182,7 @@ def remove_task(tasks):
 
 def leave_planner():
     print('Would you like to exit the planner?')
-    response = input('Please enter "yes" or "no": ')
+    response = input('\nPlease enter "yes" or "no":\n')
     if response.lower() == "yes":
         print('Goodbye, best of luck completing your tasks!')
         exit()
