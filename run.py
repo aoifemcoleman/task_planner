@@ -120,9 +120,32 @@ def complete_task(tasks):
 
     
 
-def remove_task():
-    print('Select task to remove')
-    print('Please enter number corresponding to task number')
+def remove_task(tasks):
+    print('You have selected to remove a task from your list')
+    print('\nYour tasks:')
+    """
+    Iterating through tasks to print with corresponding numbers for user
+    to make numeric choice from
+    """
+    for count, task in enumerate(tasks, start=1):
+            print(count, task.capitalize())
+    if tasks:
+        remove_task_number = input('Please enter the number corresponding to the task you wish to remove:\n')
+        if remove_task_number.isnumeric():
+            remove_task_number = int(remove_task_number)
+            if remove_task_number <= len(tasks):
+                """
+                Deducting 1 from remove_task_number as the list is displayed starting from 1 rather than 0
+                """
+                removed_task = tasks.pop(remove_task_number - 1)
+                print(f'\n"{removed_task.capitalize()}" has been removed.')
+                updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
+            else:
+                print('Invalid task number. Please enter a valid number.')
+        else:
+            print('You have not entered a valid answer. Please enter a numeric value.')
+    else: 
+        print('No tasks have been added')
 
 def leave_planner():
     print('Would you like to exit the planner?')
