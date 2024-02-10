@@ -99,24 +99,27 @@ def complete_task(tasks):
     for count, task in enumerate(tasks, start=1):
             print(count, task.capitalize())
     if tasks:
-        completed_task_number = input('Please enter the number corresponding to the task you wish to mark as complete:\n')
-        if completed_task_number.isnumeric():
-            completed_task_number = int(completed_task_number)
-            if completed_task_number <= len(tasks):
-                """
-                Deducting 1 from completed_task_number as list is displayed to
-                user starting from 1 rather than 0 as per list ordering
-                """
-                completed_task = tasks[completed_task_number - 1]
-                tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
-                print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
-                updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
-                # for count, task in updated_tasks:
-                #     print(count, task)
-            else:
-                print('Invalid task number. Please enter a valid number.')
-        else:
-            print('You have not entered a valid answer. Please enter a numeric value.')
+        while True:
+            completed_task_number = input('Please enter the number corresponding to the task you wish to mark as complete:\n')
+            try:
+                if completed_task_number.isnumeric():
+                    completed_task_number = int(completed_task_number)
+                    if completed_task_number <= len(tasks):
+                        """
+                        Deducting 1 from completed_task_number as list is displayed to
+                        user starting from 1 rather than 0 as per list ordering
+                        """
+                        completed_task = tasks[completed_task_number - 1]
+                        tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
+                        print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
+                        updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
+                        return updated_tasks
+                    else:
+                        raise ValueError('Invalid task number. Please enter a valid number.')
+                else:
+                    raise ValueError('You have not entered a valid answer. Please enter a numeric value.')
+            except ValueError as e:
+                print(f"Error: {e}")
     else: 
         print('No tasks to mark as complete')
         # Logic to go back to main menu or leave planner to go here
