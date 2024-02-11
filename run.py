@@ -3,12 +3,6 @@ from rich import print
 from rich.console import Console
 from rich.table import Table
 
-print('Welcome to your daily task planner!')
-name = input('\nWhat is your name?\n')
-# https://flexiple.com/python/python-capitalize-first-letter
-# https://www.w3schools.com/python/ref_string_format.asp
-print('\nHello, {}, what would you like to do today?'.format(name.capitalize()))
-
 def show_menu():
     """
     Display menu items and iterate through them to print each on
@@ -20,8 +14,6 @@ def show_menu():
         menu_items = ['1. View task planner', '2. Add task to planner', '3. Mark task as complete', '4. Remove task', '5. Exit task planner']
         for item in menu_items:
             console.print(item, style="magenta")
-
-# def menu_choice():
         """
         Connecting choice made by user with corresponding function
         While loop iterates through choices indefinitely until user 
@@ -40,8 +32,8 @@ def show_menu():
             leave_planner()
         else:
             print('You have not entered a valid choice. Please enter a number between 1-5.')
-    
-def view_tasks(tasks):
+
+def create_table(tasks):
     if tasks:
         table = Table(title="Your tasks")
         table.add_column("Task Number", justify="center", style="cyan")
@@ -59,29 +51,20 @@ def view_tasks(tasks):
         
         console = Console()
         console.print(table)
+
+def view_tasks(tasks):
+    if tasks:
+        create_table(tasks)
         leave_or_stay()
     else:
         no_tasks()
-        # print('\nYou have not yet added any tasks.')
-        # print('\nWould you like to add a task?\n')
-        # while True:
-        #     response = input('\nPlease enter "yes" or "no"\n')
-        #     try:
-        #         if response.lower() == "yes":
-        #             add_task(tasks)
-        #         elif response.lower() == "no":
-        #             leave_or_stay()
-        #         else:
-        #             raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
-        #     except ValueError as e:
-        #         print(f"Error: {e}")
         leave_or_stay()
 
 def no_tasks():
     print('\nYou have not yet added any tasks.')
     print('\nWould you like to add a task?\n')
     while True:
-        response = input('\nPlease enter "yes" or "no"\n')
+        response = input('\nPlease enter "yes" or "no".\n')
         try:
             if response.lower() == "yes":
                 add_task(tasks)
@@ -93,6 +76,8 @@ def no_tasks():
             print(f"Error: {e}")
 
 def add_task(tasks):
+    if tasks:
+        create_table(tasks)
     new_task = input('\nPlease enter a task:\n')
     tasks.append(new_task)
     print('\nYour task has been added')
@@ -116,7 +101,7 @@ def add_task(tasks):
 
 def complete_task(tasks):
     if tasks:
-        print('\nYour tasks:')
+        create_table(tasks)
         """
         Iterating through tasks to print with corresponding numbers for user
         to make numeric choice from
@@ -154,11 +139,11 @@ def complete_task(tasks):
                 except ValueError as e:
                     print(f"Error: {e}")
     else:
-        print('\nYou have not added any tasks to mark as complete')
+        print('\nYou have not added any tasks to mark as complete.')
         show_menu()
     add_another_task() 
 
-def add_another_task():
+def complete_another_task():
     print('\nWould you like to mark another task as complete?')
     while True:
         response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
@@ -173,13 +158,13 @@ def add_another_task():
         except ValueError as e:
             print(f"Error: {e}")
     else: 
-        print('\nNo tasks to mark as complete')
+        print('\nNo tasks to mark as complete.')
         leave_or_stay()
 
     
 
 def remove_task(tasks):
-    print('\nYou have selected to remove a task from your list')
+    print('\nYou have selected to remove a task from your list.')
     print('\nYour tasks:')
     """
     Iterating through tasks to print with corresponding numbers for user
@@ -204,7 +189,7 @@ def remove_task(tasks):
         else:
             print('\nYou have not entered a valid answer. Please enter a numeric value.')
     else: 
-        print('\nNo tasks have been added')
+        print('\nNo tasks have been added.')
         leave_or_stay()
     
 
@@ -217,7 +202,7 @@ def remove_another_task():
                 remove_task(tasks)
                 break
             elif response.lower() == "no":
-                show_menu()
+                leave_or_stay()
             else:
                 raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
         except ValueError as e:
@@ -253,12 +238,12 @@ def leave_or_stay():
 tasks = []
 
 def main():
+    print('Welcome to your daily task planner!')
+    name = input('\nWhat is your name?\n')
+    # https://flexiple.com/python/python-capitalize-first-letter
+    # https://www.w3schools.com/python/ref_string_format.asp
+    print('\nHello, {}, what would you like to do today?'.format(name.capitalize()))
     show_menu()
-    # menu_choice()
-    # view_tasks(tasks)
-    add_task(tasks)
-    # complete_task()
-    # remove_task()
-    # leave_planner()
+    # add_task(tasks)
 
 main()
