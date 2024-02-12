@@ -19,18 +19,26 @@ def show_menu():
         While loop iterates through choices indefinitely until user 
         selects to leave the planner
         """
-        choice = input('\nPlease enter a number between 1-5, corresponding to your choice.\n')
-        if choice == "1":
-            view_tasks(tasks)
-        elif choice == "2":
-            add_task(tasks)
-        elif choice == "3":
-            complete_task(tasks)
-        elif choice == "4":
-            remove_task(tasks)
-        elif choice == "5":
-            leave_planner()
-        else:
+        """
+        Ensuring users enter a number between 1-5, and that an error message will
+        populate when invalid input is entered
+        """
+        try:
+            choice = int(input('\nPlease enter a number between 1-5, corresponding to your choice.\n'))
+            if 1 <= choice <= 5:
+                if choice == 1:
+                    view_tasks(tasks)
+                elif choice == 2:
+                    add_task(tasks)
+                elif choice == 3:
+                    complete_task(tasks)
+                elif choice == 4:
+                    remove_task(tasks)
+                elif choice == 5:
+                    leave_planner()
+            else:
+                print('You have not entered a valid choice. Please enter a number between 1-5.')
+        except ValueError:
             print('You have not entered a valid choice. Please enter a number between 1-5.')
 
 def create_table(tasks):
