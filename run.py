@@ -99,12 +99,12 @@ def add_task(tasks):
         except ValueError as e:
             print(f"Error: {e}")
 
-"""
-Function checks whether all tasks already contain the string (Completed)
-which when called in separate functions will redirect user to main menu,
-as no further can be taken.
-"""
 def all_tasks_complete(tasks):
+    """
+    Function checks whether all tasks already contain the string (Completed)
+    which when called in separate functions will redirect user to main menu,
+    as no further can be taken.
+    """
     return all ("(Completed)" in task for task in tasks)
 
 def complete_task(tasks):
@@ -227,13 +227,23 @@ def remove_another_task():
 
 def leave_planner():
     print('\nWould you like to exit the planner?')
-    response = input('\nPlease enter "yes" or "no":\n')
-    if response.lower() == "yes":
-        print('\nGoodbye, best of luck completing your tasks!')
-        exit()
-    else:
-        print('\nWhat would you like to do?')
-        show_menu()
+    while True:
+        response = input('\nPlease enter "yes" or "no":\n')
+        try:
+            if response.lower() == "yes":
+                print('\nClosing the task planner...\n\nGoodbye, best of luck completing your tasks!')
+                exit()
+            elif response.lower() == "no":
+                print('\nReturning to main menu...')
+                show_menu()
+            else:
+                if any(char.isdigit() for char in response):
+                    raise ValueError('Invalid input. Please enter "yes" or "no", without any numeric values.')
+                else:
+                    raise ValueError('Invalid input. Please enter "yes" or "no".')
+        except ValueError as e:
+                print(f"Error: {e}")
+            
 
 def leave_or_stay():
     print('\nWould you like to return to the main menu or leave the planner?')
