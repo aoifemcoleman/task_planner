@@ -99,7 +99,20 @@ def add_task(tasks):
         except ValueError as e:
             print(f"Error: {e}")
 
+"""
+Function checks whether all tasks already contain the string (Completed)
+which when called in separate functions will redirect user to main menu,
+as no further can be taken.
+"""
+def all_tasks_complete(tasks):
+    return all ("(Completed)" in task for task in tasks)
+
 def complete_task(tasks):
+
+    if all_tasks_complete(tasks):
+        print('\nAll tasks have already been marked as complete. Returning to main menu.')
+        show_menu()
+
     if tasks:
         create_table(tasks)
         """
@@ -131,7 +144,7 @@ def complete_task(tasks):
                                 break
                             else:
                                 print(f'"{completed_task.capitalize()}" has already been marked as complete.')
-                                add_another_task()
+                                complete_another_task()
                         else:
                             raise ValueError('Invalid task number. Please enter a valid number.')
                     else:
@@ -141,25 +154,29 @@ def complete_task(tasks):
     else:
         print('\nYou have not added any tasks to mark as complete.')
         show_menu()
-    add_another_task() 
+    complete_another_task() 
 
 def complete_another_task():
-    print('\nWould you like to mark another task as complete?')
-    while True:
-        response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
-        try:
-            if response.lower() == "yes":
-                complete_task(tasks)
-                break
-            elif response.lower() == "no":
-                show_menu()
-            else:
-                raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
-        except ValueError as e:
-            print(f"Error: {e}")
-    else: 
-        print('\nNo tasks to mark as complete.')
-        leave_or_stay()
+    if all_tasks_complete(tasks):
+        print('\nAll tasks have been marked as complete. Returning to main menu.')
+        show_menu()
+    else:
+        print('\nWould you like to mark another task as complete?')
+        while True:
+            response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
+            try:
+                if response.lower() == "yes":
+                    complete_task(tasks)
+                    break
+                elif response.lower() == "no":
+                    show_menu()
+                else:
+                    raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
+            except ValueError as e:
+                print(f"Error: {e}")
+        else: 
+            print('\nNo tasks to mark as complete.')
+            leave_or_stay()
 
     
 
@@ -169,7 +186,7 @@ def remove_task(tasks):
     """
     Iterating through tasks to print with corresponding numbers for user
     to make numeric choice from
-    """
+    """ 
     for count, task in enumerate(tasks, start=1):
             print(count, task.capitalize())
     if tasks:
@@ -244,6 +261,5 @@ def main():
     # https://www.w3schools.com/python/ref_string_format.asp
     print('\nHello, {}, what would you like to do today?'.format(name.capitalize()))
     show_menu()
-    # add_task(tasks)
 
 main()
