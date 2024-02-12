@@ -266,7 +266,12 @@ tasks = []
 
 def main():
     print('Welcome to your daily task planner!')
-    name = input('\nWhat is your name?\n')
+    while True:
+        name = input('\nWhat is your name?\n')
+        if any(char.isdigit() for char in name):
+            print("\nUh oh, your name cannot contain any numbers. Please try again using letters only.")
+        else:
+            break
     # https://flexiple.com/python/python-capitalize-first-letter
     # https://www.w3schools.com/python/ref_string_format.asp
     print('\nHello, {}, what would you like to do today?'.format(name.capitalize()))
