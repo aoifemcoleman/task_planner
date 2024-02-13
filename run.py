@@ -2,6 +2,14 @@
 from rich import print
 from rich.console import Console
 from rich.table import Table
+import gspread 
+from google.oath2.service_account import Credentials
+
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
 
 def show_menu():
     """
@@ -123,42 +131,35 @@ def complete_task(tasks):
 
     if tasks:
         create_table(tasks)
-        """
-        Iterating through tasks to print with corresponding numbers for user
-        to make numeric choice from
-        """
-        # possible separate function can be made for below step, as is repeated
-        for count, task in enumerate(tasks, start=1):
-            print(count, task.capitalize())
-        if tasks:
-            while True:
-                completed_task_number = input('\nPlease enter the number corresponding to the task you wish to mark as complete:\n')
-                try:
-                    if completed_task_number.isnumeric():
-                        completed_task_number = int(completed_task_number)
-                        if completed_task_number <= len(tasks):
-                            """
-                            Deducting 1 from completed_task_number as list is displayed to
-                            user starting from 1 rather than 0 as per list ordering
-                            """
-                            completed_task = tasks[completed_task_number - 1]
-                            """
-                            Check to prevent user marking task as complete multiple times
-                            """
-                            if "(Completed)" not in completed_task:    
-                                tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
-                                print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
-                                updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
-                                break
-                            else:
-                                print(f'"{completed_task.capitalize()}" has already been marked as complete.')
-                                complete_another_task()
+        # if tasks:
+        while True:
+            completed_task_number = input('\nPlease enter the number corresponding to the task you wish to mark as complete:\n')
+            try:
+                if completed_task_number.isnumeric():
+                    completed_task_number = int(completed_task_number)
+                    if completed_task_number <= len(tasks):
+                        """
+                        Deducting 1 from completed_task_number as list is displayed to
+                        user starting from 1 rather than 0 as per list ordering
+                        """
+                        completed_task = tasks[completed_task_number - 1]
+                        """
+                        Check to prevent user marking task as complete multiple times
+                        """
+                        if "(Completed)" not in completed_task:    
+                            tasks[completed_task_number - 1] = f'{completed_task} (Completed)'
+                            print(f'\n"{completed_task.capitalize()}" has been marked as complete.')
+                            updated_tasks = [(count, task.capitalize()) for count, task in enumerate(tasks, start=1)]
+                            break
                         else:
-                            raise ValueError('Invalid task number. Please enter a valid number.')
+                            print(f'"{completed_task.capitalize()}" has already been marked as complete.')
+                            complete_another_task()
                     else:
-                        raise ValueError('You have not entered a valid answer. Please enter a numeric value.')
-                except ValueError as e:
-                    print(f"Error: {e}")
+                        raise ValueError('Invalid task number. Please enter a valid number.')
+                else:
+                    raise ValueError('You have not entered a valid answer. Please enter a numeric value.')
+            except ValueError as e:
+                print(f"Error: {e}")
     else:
         print('\nYou have not added any tasks to mark as complete.')
         show_menu()
@@ -186,17 +187,9 @@ def complete_another_task():
             print('\nNo tasks to mark as complete.')
             leave_or_stay()
 
-    
-
 def remove_task(tasks):
     print('\nYou have selected to remove a task from your list.')
-    print('\nYour tasks:')
-    """
-    Iterating through tasks to print with corresponding numbers for user
-    to make numeric choice from
-    """ 
-    for count, task in enumerate(tasks, start=1):
-            print(count, task.capitalize())
+    create_table(tasks)
     if tasks:
         remove_task_number = input('\nPlease enter the number corresponding to the task you wish to remove:\n')
         if remove_task_number.isnumeric():
@@ -219,19 +212,20 @@ def remove_task(tasks):
     
 
 def remove_another_task():
-    print('\nWould you like to remove another task?')
-    while True:
-        response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
-        try:
-            if response.lower() == "yes":
-                remove_task(tasks)
-                break
-            elif response.lower() == "no":
-                leave_or_stay()
-            else:
-                raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
-        except ValueError as e:
-            print(f"Error: {e}")
+    if tasks:
+        print('\nWould you like to remove another task?')
+        while True:
+            response = input('\nPlease enter "yes" to continue or "no", to return to main menu.\n')
+            try:
+                if response.lower() == "yes":
+                    remove_task(tasks)
+                    break
+                elif response.lower() == "no":
+                    leave_or_stay()
+                else:
+                    raise ValueError('\nYou have not entered a valid answer. Please enter "yes" or "no".')
+            except ValueError as e:
+                print(f"Error: {e}")
 
 def leave_planner():
     print('\nWould you like to exit the planner?')
