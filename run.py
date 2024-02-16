@@ -2,14 +2,6 @@
 from rich import print
 from rich.console import Console
 from rich.table import Table
-import gspread 
-from google.oath2.service_account import Credentials
-
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
 
 def show_menu():
     """
