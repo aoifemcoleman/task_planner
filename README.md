@@ -79,7 +79,7 @@ Within the menu option selection, the user is prompted to input a number within 
 
 ![Screenshot of exception handling where input of an integer within range of 1-5 is expected and invalid input is received.](images/invalid-menu.png)
 
-Yes/No Input Validation:
+- Yes/No Input Validation:
 
 Throughout the application, such as in functions like no_tasks(), add_task(), and leave_or_stay(), the user is asked to confirm specific actions using "yes"/"no" responses. To accommodate variations in capitalization, the user's responses are converted to lowercase. If invalid input is received, a ValueError is raised and the user is prompted to re-enter their response.
 
@@ -148,6 +148,13 @@ This project was deployed using Heroku. The steps taken for deployment are:
 - Within `Manual Deploy` select `Main` and then `Deploy Branch`. Once the branch has been built you can view your deployed project.
 
 ## Credits
+
+- Tables:
+https://rich.readthedocs.io/en/stable/tables.html
+
+- Enumeration:
+https://stackoverflow.com/questions/73923829/how-to-accept-input-from-an-enumerated-list-in-python
+https://realpython.com/python-enumerate/
 
 ## Acknowledgements
 I would like to once again thank my mentor Ronan McClelland for being so supportive, for his invaluable assistance and inspiration throughout this project.

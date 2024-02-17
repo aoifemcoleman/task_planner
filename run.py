@@ -5,10 +5,14 @@ from rich.table import Table
 
 def show_menu():
     """
-    Display menu items and iterate through them to print each on
-    new line"
+    while loop used to repeatedly display menu until
+    user enters valid input, ie. integer between 1-5
     """
     while True:
+        """
+        Creating an instance of Console class from rich library,
+        to be used for formatting.
+        """
         console = Console()
         console.print(
             '\nMain Menu:\n', style="bold cyan"
@@ -20,18 +24,19 @@ def show_menu():
             '4. Remove task',
             '5. Exit task planner'
             ]
+        """
+        Display menu items and iterate through them to print
+        each on new line, applying style from rich library
+        """
         for item in menu_items:
             console.print(
                 item, style="magenta"
                 )
         """
         Connecting choice made by user with corresponding function
-        While loop iterates through choices indefinitely until user
-        selects to leave the planner
-        """
-        """
-        Ensuring users enter a number between 1-5, and that an
-        error message will populate when invalid input is entered
+        Exception handling used to populate error message when
+        invalid input is entered, ie. string or non-integer
+        between 1-5
         """
         try:
             choice = int(
@@ -65,6 +70,11 @@ def show_menu():
 
 def create_table(tasks):
     if tasks:
+        """
+        Creating table object from rich library
+        Method learned and adapted from here:
+        https://rich.readthedocs.io/en/stable/tables.html
+        """
         table = Table(title="Your tasks")
         table.add_column("Task Number", justify="center", style="cyan")
         table.add_column("Task Name", justify="center", style="magenta")
@@ -97,17 +107,25 @@ def no_tasks():
         '\nYou have not yet added any tasks.'
         )
     print(
-        '\nWould you like to add a task?\n'
+        '\nWould you like to add a task?'
         )
     while True:
         response = input(
             '\nPlease enter "yes" or "no".\n'
             )
         try:
+            """
+            lower method used to accommodate various
+            use of capitilisation
+            """
             if response.lower() == "yes":
                 add_task(tasks)
             elif response.lower() == "no":
                 leave_or_stay()
+                """
+                checking if any character in response
+                is a digit, and if so raising value error
+                """
             elif any(char.isdigit() for char in response):
                 raise ValueError(
                     'Invalid input. Please enter "yes" or "no",'
@@ -190,6 +208,11 @@ def complete_task(tasks):
             try:
                 if completed_task_number.isnumeric():
                     completed_task_number = int(completed_task_number)
+                    """
+                    checking if user input is numeric and then
+                    whether it is in within valid range of amount of task
+                    items in task list
+                    """
                     if completed_task_number <= len(tasks):
                         """
                         Deducting 1 from completed_task_number as list is
@@ -202,6 +225,14 @@ def complete_task(tasks):
                         multiple times
                         """
                         if "(Completed)" not in completed_task:
+                            """
+                            Creating new string for task to include
+                            (Completed).
+                            Updating task at specified index in task list
+                            to include new string.
+                            Backslash used to continue code on new line
+                            due to limited terminal width.
+                            """
                             tasks[completed_task_number - 1] = \
                                 f'{completed_task} (Completed)'
                             print(
@@ -222,7 +253,7 @@ def complete_task(tasks):
                     else:
                         raise ValueError(
                             'Invalid task number. Please enter a'
-                            'valid number.'
+                            ' valid number.'
                             )
                 else:
                     raise ValueError(
@@ -256,7 +287,6 @@ def complete_another_task():
             try:
                 if response.lower() == "yes":
                     complete_task(tasks)
-                    break
                 elif response.lower() == "no":
                     show_menu()
                 elif any(char.isdigit() for char in response):
@@ -286,12 +316,19 @@ def remove_task(tasks):
             '\nPlease enter the number corresponding to the'
             ' task you wish to remove:\n'
             )
+        """
+        checking if user input is numeric and then whether
+        it is in within valid range of amount of task
+        items in task list
+        """
         if remove_task_number.isnumeric():
             remove_task_number = int(remove_task_number)
             if remove_task_number <= len(tasks):
                 """
                 Deducting 1 from remove_task_number as the list is
-                displayed starting from 1 rather than 0.
+                displayed starting from 1 rather than 0 as per list
+                indexing.
+                Removing task at specified index in task list.
                 """
                 removed_task = tasks.pop(remove_task_number - 1)
                 print(
@@ -320,6 +357,12 @@ def remove_task(tasks):
 
 
 def remove_another_task():
+    """
+    Function handles removing further tasks from
+    the task list, validating user input and using
+    exception handling with value errors to inform
+    users of invalid input
+    """
     if tasks:
         print(
             '\nWould you like to remove another task?'
@@ -350,6 +393,12 @@ def remove_another_task():
 
 
 def leave_planner():
+    """
+    Function confirms with user whether they would like
+    to leave the task planner, using yes/no input, which
+    is validated. A while loop is used to continue prompting
+    the user to enter a valid answer
+    """
     print(
         '\nWould you like to exit the planner?'
         )
@@ -389,6 +438,10 @@ def leave_planner():
 
 
 def leave_or_stay():
+    """
+    Function confirms with user whether they would like to
+    return to the main menu or leave the planner.
+    """
     print(
         '\nWould you like to return to the main menu or leave the planner?'
         )
@@ -416,6 +469,7 @@ def leave_or_stay():
             print(f"Error: {e}")
 
 
+# global tasks list
 tasks = []
 
 
@@ -423,6 +477,11 @@ def main():
     print(
         'Welcome to your daily task planner!'
         )
+    """
+    While loop iterates until user provides valid input.
+    Error message printed if any character in the name
+    contains a number.
+    """
     while True:
         name = input(
             '\nWhat is your name?\n'
@@ -434,8 +493,10 @@ def main():
                 )
         else:
             break
-    # https://flexiple.com/python/python-capitalize-first-letter
-    # https://www.w3schools.com/python/ref_string_format.asp
+    """
+    Method for string formatting learned and modified from here:
+    https://www.w3schools.com/python/ref_string_format.asp
+    """
     print(
         '\nHello, {}, what would you like'
         ' to do today?'.format(name.capitalize())
