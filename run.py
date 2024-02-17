@@ -58,15 +58,12 @@ def show_menu():
                 elif choice == 5:
                     leave_planner()
             else:
-                print(
+                raise ValueError(
                     'You have not entered a valid choice.'
-                    ' Please enter a number between 1-5.'
+                    ' Input value must be a whole number between 1-5.'
                     )
-        except ValueError:
-            print(
-                'You have not entered a valid choice.'
-                ' Please enter a number between 1-5.'
-            )
+        except ValueError as e:
+            print(f"Error: {e}")
 
 
 def create_table(tasks):
