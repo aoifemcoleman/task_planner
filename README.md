@@ -72,7 +72,17 @@ The user is asked to confirm their choice with "yes" or "no" strings. The former
 
 #### Exception handling
 
+
+
 ### Future Features
+
+#### Data storage
+
+In future versions of this application, I would like to offer the user the flexibility of connecting their task planner with either a database, or creating a Google Sheet for efficient storage.
+
+#### Calendar Integration
+
+Another potential feature for future versions would involve enabling users to create to-do lists within the task planner for specific dates. Storing this information in a database or Google Sheet would allow users to conveniently select and act upon lists associated with different dates.
 
 ## Data Model
 
@@ -101,3 +111,4 @@ This project was deployed using Heroku. The steps taken for deployment are:
 ## Credits
 
 ## Acknowledgements
+I would like to once again thank my mentor Ronan McClelland for being so supportive, for his invaluable assistance and inspiration throughout this project.
