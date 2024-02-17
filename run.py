@@ -108,6 +108,11 @@ def no_tasks():
                 add_task(tasks)
             elif response.lower() == "no":
                 leave_or_stay()
+            elif any(char.isdigit() for char in response):
+                raise ValueError(
+                    'Invalid input. Please enter "yes" or "no",'
+                    ' without any numeric values.'
+                    )
             else:
                 raise ValueError(
                     '\nYou have not entered a valid answer.'
@@ -143,6 +148,11 @@ def add_task(tasks):
                 add_task(tasks)
             elif response.lower() == "no":
                 show_menu()
+            elif any(char.isdigit() for char in response):
+                raise ValueError(
+                    'Invalid input. Please enter "yes" or "no",'
+                    ' without any numeric values.'
+                    )
             else:
                 raise ValueError(
                     '\nYou have not entered a valid answer.'
@@ -249,6 +259,11 @@ def complete_another_task():
                     break
                 elif response.lower() == "no":
                     show_menu()
+                elif any(char.isdigit() for char in response):
+                    raise ValueError(
+                        'Invalid input. Please enter "yes" or "no",'
+                        ' without any numeric values.'
+                        )
                 else:
                     raise ValueError(
                         '\nYou have not entered a valid answer.'
@@ -320,6 +335,11 @@ def remove_another_task():
                     break
                 elif response.lower() == "no":
                     leave_or_stay()
+                elif any(char.isdigit() for char in response):
+                    raise ValueError(
+                        'Invalid input. Please enter "yes" or "no",'
+                        ' without any numeric values.'
+                        )
                 else:
                     raise ValueError(
                         '\nYou have not entered a valid answer.'
@@ -349,6 +369,11 @@ def leave_planner():
                     '\nReturning to main menu...'
                     )
                 show_menu()
+            elif any(char.isdigit() for char in response):
+                raise ValueError(
+                    'Invalid input. Please enter "yes" or "no",'
+                    ' without any numeric values.'
+                    )
             else:
                 if any(char.isdigit() for char in response):
                     raise ValueError(

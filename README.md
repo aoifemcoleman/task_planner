@@ -71,8 +71,27 @@ The user is asked to confirm their choice with "yes" or "no" strings. The former
 ![Screenshot of user exiting the app.](images/leave-planner.png)
 
 #### Exception handling
+Exception handling exists throughout the various functions and features within the application in order to gracefully handle unexpected errors or input, and provide the user with informative error messages. Some examples of exception handling in this project include:
 
+__Invalid Menu Choices:__
+Within the menu option selection, the user is prompted to input a number within the range of 1-5, corresponding to the menu item of their choice. The code then checks whether a valid integer within this range has been provided. If an invalid response has been received, a ValueError is raised and the user is requested to enter a valid answer.
 
+![Screenshot of exception handling where input of an integer within range of 1-5 is expected and invalid input is received.](images/invalid-menu.png)
+
+__Yes/No Input Validation:__
+Throughout the application, such as in functions like no_tasks(), add_task(), and leave_or_stay(), the user is asked to confirm specific actions using "yes"/"no" responses. To accommodate variations in capitalization, the user's responses are converted to lowercase. If invalid input is received, a ValueError is raised and the user is prompted to re-enter their response.
+
+![Screenshot of exception handling where yes/no input is expected and invalid input is received.](images/yes-or-no.png)
+
+__Numeric Input Handling:__
+Where a user is requested to provide a string input but enters an integer, a Value Error is raised with an informative message advising the user the requested input should not include any numeric values.
+
+![Screenshot of exception handling of invalid types.](images/error-numeric.png)
+
+__Task Number Validation:__
+In the functions complete_tasks(tasks) and remove_tasks(tasks) the user's input is checked to ensure an integer within the range of tasks available has been entered, and if not a Value Error is raised with an informative message.
+
+![Screenshot of exception handling within complete_tasks(tasks) function.](images/error-complete-tasks.png)
 
 ### Future Features
 
