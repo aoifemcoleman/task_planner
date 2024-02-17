@@ -73,22 +73,26 @@ The user is asked to confirm their choice with "yes" or "no" strings. The former
 #### Exception handling
 Exception handling exists throughout the various functions and features within the application in order to gracefully handle unexpected errors or input, and provide the user with informative error messages. Some examples of exception handling in this project include:
 
-__Invalid Menu Choices:__
+Invalid Menu Choices:
+
 Within the menu option selection, the user is prompted to input a number within the range of 1-5, corresponding to the menu item of their choice. The code then checks whether a valid integer within this range has been provided. If an invalid response has been received, a ValueError is raised and the user is requested to enter a valid answer.
 
 ![Screenshot of exception handling where input of an integer within range of 1-5 is expected and invalid input is received.](images/invalid-menu.png)
 
-__Yes/No Input Validation:__
+Yes/No Input Validation:
+
 Throughout the application, such as in functions like no_tasks(), add_task(), and leave_or_stay(), the user is asked to confirm specific actions using "yes"/"no" responses. To accommodate variations in capitalization, the user's responses are converted to lowercase. If invalid input is received, a ValueError is raised and the user is prompted to re-enter their response.
 
 ![Screenshot of exception handling where yes/no input is expected and invalid input is received.](images/yes-or-no.png)
 
-__Numeric Input Handling:__
+- Numeric Input Handling:
+
 Where a user is requested to provide a string input but enters an integer, a Value Error is raised with an informative message advising the user the requested input should not include any numeric values.
 
 ![Screenshot of exception handling of invalid types.](images/error-numeric.png)
 
-__Task Number Validation:__
+- Task Number Validation:
+
 In the functions complete_tasks(tasks) and remove_tasks(tasks) the user's input is checked to ensure an integer within the range of tasks available has been entered, and if not a Value Error is raised with an informative message.
 
 ![Screenshot of exception handling within complete_tasks(tasks) function.](images/error-complete-tasks.png)
@@ -107,9 +111,25 @@ Another potential feature for future versions would involve enabling users to cr
 
 ## Testing
 
+I have manually tested the project throughout by doing the following:
+- Using a pep8 linter to confirm there are no issues.
+- Tested the project throughout its development in my own terminal, and then in the deployed project on Heroku.
+- Providing invalid inputs such as integers where strings are expected and vice versa throughout the application.
+
 ### Bugs
 
 #### Solved bugs
+- Completed tasks:
+
+Within the complete_tasks(tasks) function, where a user selected to mark a particular task as completed, a user could potentially mark a task as completed twice. This was resolved by adding a check for whether the task already contained "(completed)" before proceeding with the logic.
+
+- Index errors:
+
+Initially when writing my code for the complete_tasks(tasks) function, I was getting errors when inputting the integer 1 to select the first task, when there was only item in my list, as the list was displayed starting from 1 rather than 0 as in standard list ordering. I solved this by deducting 1 from completed_task_number. I then applied the same resolution to my remove_tasks(tasks) function.
+
+#### Remaining bugs
+
+There are no bugs remaining in the project.
 
 ### Validator Testing
 
