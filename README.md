@@ -113,7 +113,7 @@ Another potential feature for future versions would involve enabling users to cr
 
 I have manually tested the project throughout by doing the following:
 - Using a pep8 linter to confirm there are no issues.
-- Tested the project throughout its development in my own terminal, and then in the deployed project on Heroku.
+- Tested the project throughout it's development in my own terminal, and then in the deployed project terminal on Heroku.
 - Providing invalid inputs such as integers where strings are expected and vice versa throughout the application.
 
 ### Bugs
@@ -149,12 +149,10 @@ This project was deployed using Heroku. The steps taken for deployment are:
 
 ## Credits
 
-- Tables:
-https://rich.readthedocs.io/en/stable/tables.html
-
-- Enumeration:
-https://stackoverflow.com/questions/73923829/how-to-accept-input-from-an-enumerated-list-in-python
-https://realpython.com/python-enumerate/
+### Code
+- Inspiration for styling using rich library aquired and adopted from [Rich]:(https://rich.readthedocs.io/en/stable/style.html)
+- Learned about creating tables and used code snippets from [Rich](https://rich.readthedocs.io/en/stable/tables.html).
+- Idea for enumeration found on [Stack Overflow](https://stackoverflow.com/questions/73923829/how-to-accept-input-from-an-enumerated-list-in-python) and method learned and modified from [Real Python]([)](https://realpython.com/python-enumerate/)
 
 ## Acknowledgements
 I would like to once again thank my mentor Ronan McClelland for being so supportive, for his invaluable assistance and inspiration throughout this project.

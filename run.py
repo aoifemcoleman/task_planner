@@ -11,7 +11,8 @@ def show_menu():
     while True:
         """
         Creating an instance of Console class from rich library,
-        to be used for formatting.
+        to be used for formatting. Learned about rich here:
+        https://rich.readthedocs.io/en/stable/style.html
         """
         console = Console()
         console.print(
