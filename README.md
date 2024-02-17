@@ -121,11 +121,11 @@ I have manually tested the project throughout by doing the following:
 #### Solved bugs
 - Completed tasks:
 
-Within the complete_tasks(tasks) function, where a user selected to mark a particular task as completed, a user could potentially mark a task as completed twice. This was resolved by adding a check for whether the task already contained "(completed)" before proceeding with the logic.
+Within the complete_tasks(tasks) function, where a user selected to mark a particular task as completed, a user could potentially mark a task as completed multiple times. This was resolved by adding a check for whether the task already contained "(Completed)" before proceeding with the logic.
 
 - Index errors:
 
-Initially when writing my code for the complete_tasks(tasks) function, I was getting errors when inputting the integer 1 to select the first task, when there was only item in my list, as the list was displayed starting from 1 rather than 0 as in standard list ordering. I solved this by deducting 1 from completed_task_number. I then applied the same resolution to my remove_tasks(tasks) function.
+Initially when writing my code for the complete_tasks(tasks) function, I was getting errors for example when inputting the integer 1 to select the first task, when there was only item in my list, as the list was displayed starting from 1 rather than 0 as in the list indexing. I solved this by deducting 1 from completed_task_number. I then applied the same resolution to my remove_tasks(tasks) function.
 
 #### Remaining bugs
 
