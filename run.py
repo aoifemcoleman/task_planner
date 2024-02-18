@@ -47,8 +47,9 @@ def show_menu():
                 )
             if not user_input.isdigit():
                 raise ValueError(
-                    'You have not entered a valid choice. Input must be a whole number between 1-5.'
-                )
+                    'You have not entered a valid choice.'
+                    'Input must be a whole number between 1-5.'
+                    )
             choice = int(user_input)
             if 1 <= choice <= 5:
                 if choice == 1:
@@ -69,11 +70,14 @@ def show_menu():
         except ValueError as e:
             print(f"Error: {e}")
 
+
 """
 Global task list used as parameter in several functions
 to store and manage user input - for viewing, adding,
 completing and removing tasks.
 """
+
+
 def create_table(tasks):
     if tasks:
         """
@@ -134,13 +138,14 @@ def no_tasks():
                 """
             elif any(char.isdigit() for char in response):
                 raise ValueError(
-                    'Invalid input. Please enter "yes" or "no",'
-                    ' without any numeric values.'
+                    'Invalid input. Input cannot contain'
+                    ' numeric values.'
                     )
             else:
                 raise ValueError(
-                    '\nYou have not entered a valid answer.'
-                    'Please enter "yes" or "no".'
+                    'Invalid input. Input must be "yes" or "no",'
+                    ' without any special characters, spaces or'
+                    ' numeric values.'
                     )
         except ValueError as e:
             print(f"Error: {e}")
@@ -305,13 +310,14 @@ def complete_another_task():
                     show_menu()
                 elif any(char.isdigit() for char in response):
                     raise ValueError(
-                        'Invalid input. Please enter "yes" or "no",'
-                        ' without any numeric values.'
+                        'Invalid input. Input cannot contain'
+                        ' numeric values.'
                         )
                 else:
                     raise ValueError(
-                        '\nYou have not entered a valid answer.'
-                        ' Please enter "yes" or "no".'
+                        'Invalid input. Input must be "yes" or "no",'
+                        ' without any special characters, spaces or'
+                        ' numeric values.'
                         )
             except ValueError as e:
                 print(f"Error: {e}")
@@ -356,10 +362,11 @@ def remove_task(tasks):
                             for count, task in enumerate(tasks, start=1)
                             ]
                         break
-                        remove_another_task()
+                        if tasks:
+                            remove_another_task()
                     else:
                         raise ValueError(
-                            '\nInvalid task number. Please enter a number'
+                            '\nInvalid task number.'
                             )
                 else:
                     raise ValueError(
@@ -403,13 +410,14 @@ def remove_another_task():
                     leave_or_stay()
                 elif any(char.isdigit() for char in response):
                     raise ValueError(
-                        'Invalid input. Please enter "yes" or "no",'
-                        ' without any numeric values.'
+                        'Invalid input. Input cannot contain'
+                        ' numeric values.'
                         )
                 else:
                     raise ValueError(
-                        '\nYou have not entered a valid answer.'
-                        ' Please enter "yes" or "no".'
+                        'Invalid input. Input must be "yes" or "no",'
+                        ' without any special characters, spaces or'
+                        ' numeric values.'
                         )
             except ValueError as e:
                 print(f"Error: {e}")
@@ -454,7 +462,7 @@ def leave_planner():
                         )
                 else:
                     raise ValueError(
-                        'Invalid input. Please enter "yes" or "no".'
+                        'Invalid input. Input must only contain "yes" or "no".'
                         )
         except ValueError as e:
             print(f"Error: {e}")

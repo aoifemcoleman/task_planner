@@ -97,6 +97,12 @@ In the functions complete_tasks(tasks) and remove_tasks(tasks) the user's input 
 
 ![Screenshot of exception handling within complete_tasks(tasks) function.](images/error-complete-tasks.png)
 
+#### Formatting with Rich Library
+
+The rich library has been installed within this project, in order to provide the user with an enhanced and more visually appealing experience. 
+
+The table class has been implemented to display the tasks list in an aesthetically pleasing and structured format, and the main menu has been styled distinctively in magenta and cyan colours. This formatting highlights to the user when they have returned to the main menu and can make further choices within their task planner, improving readability and organisation.
+
 ### Future Features
 
 #### Data storage
@@ -141,23 +147,53 @@ I have manually tested the project throughout by doing the following:
 - Using a pep8 linter to confirm there are no issues.
 - Tested the project throughout it's development in my own terminal, and then in the deployed project terminal on Heroku.
 
+The below tables illustrate the results of my feature testing.
+
 ### Menu display
-
-I tested the show_menu() function within the terminal, by entering an integer within the range of 1-5, which correctly triggers the calling of the corresponding function. When an integer outside of this range is entered, or a string value, an error message is displayed to the user:
-
-![Screenshot of error messages for invalid input in main menu.](images/menu-error-message.png)
+| Testing scenario           | Input                            | Expected Result                                              |
+| ------------------ | -------------------------------- | ------------------------------------------------------------ |
+| Valid Input        | Enter an integer within the range of 1-5. | The corresponding function is called, and the task planner operates as expected. |
+| Invalid Input (Out of Range) | Enter an integer outside the range of 1-5. | An error message is displayed, advising the user their input was invalid and the menu is displayed again |
+| Invalid Input (Non-Integer) | Enter a string, space or a special character. | An error message is displayed, prompting the user to enter a numeric value between 1-5. |
 
 ### Task Display
+| Testing scenario           | Input                            | Expected Result                                              |
+| ------------------ | -------------------------------- | ------------------------------------------------------------ |
+| No Tasks Added | Enter yes or no, to question of whether you would you like to add a task | Error message is displayed if anything other than the strings "yes" or "no" are entered. With "yes", add_tasks(tasks) function is called, with "no" show_menu() function is called, operating as expected. |
+| Tasks Added | Enter "return" or "leave", to question of whether you would like to return to main menu or leave planner| create_table(tasks) function is called to display tasks list. If invalid input received, an error message is displayed, advising the user their input was invalid and they are prompted to respond again. Otherwise, leave_or_stay() function is called and operates as expected. |
 
 ### Task Addition
+| Testing scenario           | Input                            | Expected Result                                              |
+| ------------------ | -------------------------------- | ------------------------------------------------------------ |
+|Task Addition - Second Main Menu Option | User can enter a task using any combination of strings, integers etc with no limitations. | The task is appended to the global tasks list as expected, and can be viewed when the view_tasks(tasks) function is called, or when adding another task, as expected. |
+|Task Addition - First Main Menu Option - Invalid Input | Enter "yes" or "no", to question of whether user would you like to add a task.| An error message is displayed, advising the user their input was invalid choice and the question is displayed again.|
+|Task Addition - First Main Menu Option - Valid Input | Enter "yes" or "no", to question of whether user would you like to add a task.| add_task(tasks) function is called and user can enter a task using any combination of strings, integers etc with no limitations, and input is appended to tasks list, operating as expected. |
 
 ### Task Completion
+|Testing Scenario                        | Input                                  | Expected Result                                              |
+| ------------------------------- | -------------------------------------- | ------------------------------------------------------------ |
+| Mark Task as Complete | Enter the number corresponding to a task in the list, to mark as complete. | The selected task is marked as complete, and the user receives confirmation. |
+| Mark Another Task as Complete | Enter "yes" or "no", to question of whether you would you like to complete another task | With "yes" user is prompted to select another task in the list to mark as complete. With "no" user is returned to main menu. |
+| Attempt to Mark Already Completed Task | Enter the number corresponding to a task that is already marked as complete. | An informative message is displayed, indicating that the task is already marked as complete, and asks user if they wish to mark another task as complete or not. |
+| Invalid Input (Non-Numeric) | Enter a non-numeric value when prompted. | An error message is displayed, guiding the user to enter a numeric value corresponding to a task. |
+| Invalid Task Number | Enter a task number that exceeds the range of tasks in the tasks list. | An error message is displayed, instructing the user to enter a valid task number. |
 
 ### Task Removal
 
-### Exiting the application
+|Testing Scenario                        | Input                                  | Expected Result                                              |
+| ------------------------------- | -------------------------------------- | ------------------------------------------------------------ |
+| Remove Task | Enter the number corresponding to a task, to remove. | The selected task is removed from the task list, and the user receives confirmation. |
+| Remove Another Task | Enter yes or no, to question of whether you would you like to remove another task | With "yes" user is prompted to select another task in the list to remove. With "no" user is returned to main menu. |
+| Removal Attempt of Non-Existent Task | Enter a task number that does not exist. | An error message is displayed, informing the user that the task number is invalid, and prompts them to enter a valid number. |
+| Invalid Input (Non-Numeric) | Enter a non-numeric value when prompted. | An error message is displayed, advising the user to enter a numeric value corresponding to a task. |
 
-- Providing invalid inputs such as integers where strings are expected and vice versa throughout the application.
+### Exiting the application
+| Testing scenario           | Input                            | Expected Result                                              |
+| ------------------ | -------------------------------- | ------------------------------------------------------------ |
+| leave_planner() - Valid Input | Enter string of "yes" or "no". | With "yes" the exit() function is called, ending the user's interacting with the task planner. With "no" the user is brought back to the main menu. The function therefore operates as expected. |
+|leave_planner() Invalid Input | Enter a special character, space, integer within a string or alone | An error message is displayed, advising the user their input was invalid choice and the prompt is displayed again. |
+| leave_or_stay() - Valid Input | Enter string of "return" or "leave" | When this function is called, an input of "return" calls the show_menu() function, bringing the user back to the main menu. An input of "leave" prints a goodbye message and calls the exit() function, ending the user's interacting with the task planner. The function therefore operates as expected.|
+| leave_or_stay() - Invalid Input (Non-Integer) | Enter a string apart from "return" or "leave", a space, numeric value(s) or special character(s). | An error message is displayed, prompting the user to enter a string of "return" or "leave". |
 
 ### Bugs
 
@@ -169,6 +205,10 @@ Within the complete_tasks(tasks) function, where a user selected to mark a parti
 - Index errors:
 
 Initially when writing my code for the complete_tasks(tasks) function, I was getting errors for example when inputting the integer 1 to select the first task, when there was only item in my list, as the list was displayed starting from 1 rather than 0 as in the list indexing. I solved this by deducting 1 from completed_task_number. I then applied the same resolution to my remove_tasks(tasks) function.
+
+- Exception handling:
+
+Within the show_menu() function, initially if a user entered a space or a special character, the terminal would print a generic non-user friendly error message, which did not provide specific information on the error the user had made. The show_menu() function was therefore updated to first raise a value error if the user input was not a digit, before converting the input to an integer.
 
 #### Remaining bugs
 
