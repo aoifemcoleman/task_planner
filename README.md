@@ -109,8 +109,6 @@ Another potential feature for future versions would involve enabling users to cr
 
 ## Data Model
 
-## Data Model
-
 Fundamental to the task planner is the global `tasks` list, a central data structure that plays a crucial role in the organisation and management of tasks throughout the project. Each main function within the task planner interacts with this list, allowing users to view, add, complete, and remove tasks through its use as a parameter. This data structure is used in the following functions:
 
 - create_table(tasks):
@@ -142,6 +140,23 @@ A task at a specified index within the `tasks` list can be removed by the user.
 I have manually tested the project throughout by doing the following:
 - Using a pep8 linter to confirm there are no issues.
 - Tested the project throughout it's development in my own terminal, and then in the deployed project terminal on Heroku.
+
+### Menu display
+
+I tested the show_menu() function within the terminal, by entering an integer within the range of 1-5, which correctly triggers the calling of the corresponding function. When an integer outside of this range is entered, or a string value, an error message is displayed to the user:
+
+![Screenshot of error messages for invalid input in main menu.](images/menu-error-message.png)
+
+### Task Display
+
+### Task Addition
+
+### Task Completion
+
+### Task Removal
+
+### Exiting the application
+
 - Providing invalid inputs such as integers where strings are expected and vice versa throughout the application.
 
 ### Bugs
@@ -181,6 +196,7 @@ This project was deployed using Heroku. The steps taken for deployment are:
 - Inspiration for styling using rich library aquired and adopted from [Rich]:(https://rich.readthedocs.io/en/stable/style.html)
 - Learned about creating tables and used code snippets from [Rich](https://rich.readthedocs.io/en/stable/tables.html).
 - Idea for enumeration found on [Stack Overflow](https://stackoverflow.com/questions/73923829/how-to-accept-input-from-an-enumerated-list-in-python) and method learned and modified from [Real Python]([)](https://realpython.com/python-enumerate/)
+- Idea for input validation in menu function taken from here: https://stackoverflow.com/questions/16335771/shorter-way-to-check-if-a-string-is-not-isdigit
 
 ## Acknowledgements
 I would like to once again thank my mentor Ronan McClelland for being so supportive, for his invaluable assistance and inspiration throughout this project.

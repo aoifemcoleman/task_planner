@@ -37,15 +37,19 @@ def show_menu():
         Connecting choice made by user with corresponding function
         Exception handling used to populate error message when
         invalid input is entered, ie. string or non-integer
-        between 1-5
+        between 1-5. Method found and modified from here:
+        https://stackoverflow.com/questions/16335771/shorter-way-to-check-if-a-string-is-not-isdigit
         """
         try:
-            choice = int(
-                input(
-                    '\nPlease enter a number between 1-5,'
-                    ' corresponding to your choice.\n'
-                    )
+            user_input = input(
+                '\nPlease enter a number between 1-5,corresponding'
+                ' to your choice.\n'
                 )
+            if not user_input.isdigit():
+                raise ValueError(
+                    'You have not entered a valid choice. Input must be a whole number between 1-5.'
+                )
+            choice = int(user_input)
             if 1 <= choice <= 5:
                 if choice == 1:
                     view_tasks(tasks)
@@ -355,7 +359,7 @@ def remove_task(tasks):
                         remove_another_task()
                     else:
                         raise ValueError(
-                            '\nInvalid task number.'
+                            '\nInvalid task number. Please enter a number'
                             )
                 else:
                     raise ValueError(
