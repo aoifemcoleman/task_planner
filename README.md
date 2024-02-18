@@ -109,6 +109,34 @@ Another potential feature for future versions would involve enabling users to cr
 
 ## Data Model
 
+## Data Model
+
+Fundamental to the task planner is the global `tasks` list, a central data structure that plays a crucial role in the organisation and management of tasks throughout the project. Each main function within the task planner interacts with this list, allowing users to view, add, complete, and remove tasks through its use as a parameter. This data structure is used in the following functions:
+
+- create_table(tasks):
+
+Creates a table using the `tasks` list as a parameter, generating rows corresponding to the length of the tasks list.
+
+- view_tasks(tasks): 
+
+Using the `tasks` list as a parameter, the user can view the tasks that have been added to the tasks list.
+
+- add_task(tasks): 
+
+Enables users to append a task item to the `tasks` list.
+
+- all_tasks_complete(tasks):
+
+The `tasks` list is checked for all tasks which contain (Completed) within their string.
+
+- complete_task(tasks):
+
+A task at a specified index within the `tasks` list is replaced with a string to include (Completed), effectively marking the task in the list as complete.
+
+- remove_task(tasks):
+
+A task at a specified index within the `tasks` list can be removed by the user.
+
 ## Testing
 
 I have manually tested the project throughout by doing the following:

@@ -65,7 +65,11 @@ def show_menu():
         except ValueError as e:
             print(f"Error: {e}")
 
-
+"""
+Global task list used as parameter in several functions
+to store and manage user input - for viewing, adding,
+completing and removing tasks.
+"""
 def create_table(tasks):
     if tasks:
         """
@@ -139,8 +143,16 @@ def no_tasks():
 
 
 def add_task(tasks):
+    """
+    check if tasks list contains list items,
+    and if true, displaying these items to user in a
+    table
+    """
     if tasks:
         create_table(tasks)
+    """
+    adding new task to tasks list using user input
+    """
     new_task = input('\nPlease enter a task:\n')
     tasks.append(new_task)
     print(
@@ -310,43 +322,48 @@ def remove_task(tasks):
         )
     create_table(tasks)
     if tasks:
-        remove_task_number = input(
-            '\nPlease enter the number corresponding to the'
-            ' task you wish to remove:\n'
-            )
-        """
-        checking if user input is numeric and then whether
-        it is in within valid range of amount of task
-        items in task list
-        """
-        if remove_task_number.isnumeric():
-            remove_task_number = int(remove_task_number)
-            if remove_task_number <= len(tasks):
-                """
-                Deducting 1 from remove_task_number as the list is
-                displayed starting from 1 rather than 0 as per list
-                indexing.
-                Removing task at specified index in task list.
-                """
-                removed_task = tasks.pop(remove_task_number - 1)
-                print(
-                    f'\n"{removed_task.capitalize()}"'
-                    ' has been removed.'
-                    )
-                updated_tasks = [
-                    (count, task.capitalize())
-                    for count, task in enumerate(tasks, start=1)
-                    ]
-                remove_another_task()
-            else:
-                print(
-                    '\nInvalid task number. Please enter a valid number.'
-                    )
-        else:
-            print(
-                '\nYou have not entered a valid answer.'
-                ' Please enter a numeric value.'
+        while True:
+            remove_task_number = input(
+                '\nPlease enter the number corresponding to the'
+                ' task you wish to remove:\n'
                 )
+            """
+            checking if user input is numeric and then whether
+            it is in within valid range of amount of task
+            items in task list
+            """
+            try:
+                if remove_task_number.isnumeric():
+                    remove_task_number = int(remove_task_number)
+                    if remove_task_number <= len(tasks):
+                        """
+                        Deducting 1 from remove_task_number as the list is
+                        displayed starting from 1 rather than 0 as per list
+                        indexing.
+                        Removing task at specified index in task list.
+                        """
+                        removed_task = tasks.pop(remove_task_number - 1)
+                        print(
+                            f'\n"{removed_task.capitalize()}"'
+                            ' has been removed.'
+                            )
+                        updated_tasks = [
+                            (count, task.capitalize())
+                            for count, task in enumerate(tasks, start=1)
+                            ]
+                        break
+                        remove_another_task()
+                    else:
+                        raise ValueError(
+                            '\nInvalid task number.'
+                            )
+                else:
+                    raise ValueError(
+                        '\nYou have not entered a valid answer.'
+                        ' Please enter a numeric value.'
+                        )
+            except ValueError as e:
+                print(f"Error: {e}")
     else:
         print(
             '\nNo tasks have been added.'
@@ -373,6 +390,10 @@ def remove_another_task():
             try:
                 if response.lower() == "yes":
                     remove_task(tasks)
+                    """
+                    breaking while loop once user has entered valid
+                    input
+                    """
                     break
                 elif response.lower() == "no":
                     leave_or_stay()
